@@ -1,11 +1,12 @@
 package com.example.lombokpitfalls.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+@Data
 @Entity
 @Table(name = "users")
 public class User {
@@ -14,4 +15,6 @@ public class User {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private Set<Post> posts = new LinkedHashSet<>();
 }
